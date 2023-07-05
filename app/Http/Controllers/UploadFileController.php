@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Session;
 
 class UploadFileController extends Controller
 {
@@ -37,6 +38,8 @@ class UploadFileController extends Controller
 
             $storagePath = 'pdfs/';
             $pdfFile->storeAs($storagePath, $pdfFileName, 'external');
+
+            Session::put('pdfFileName', $pdfFileName);
 
             return redirect()->back()->with('success', 'PDF file uploaded successfully.');
         }
