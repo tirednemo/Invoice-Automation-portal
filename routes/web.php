@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UploadFileController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -33,5 +35,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/upload', function () {
+    return view('uploadInvoice');
+})->middleware(['auth'])->name('uploadInvoice');
+
+Route::post('/upload-pdf', [UploadFileController::class, 'uploadPDF'])->middleware(['auth'])->name('upload.invoice');
+
 
 require __DIR__.'/auth.php';
