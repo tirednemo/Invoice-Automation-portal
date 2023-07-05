@@ -36,6 +36,11 @@ return [
             'throw' => false,
         ],
 
+        'external' => [
+            'driver' => 'local',
+            'root' => 'C:\xampp\htdocs\Invoice-Front-main',
+        ],
+
         'public' => [
             'driver' => 'local',
             'root' => storage_path('app/public'),
