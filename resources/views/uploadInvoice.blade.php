@@ -5,77 +5,61 @@
         </h2>
     </x-slot>
 
-    <style>
-    .file-preview-item {
-        display: flex;
-        align-items: center;
-        padding: 8px;
-        background-color: #F7FAFC;
-        border: 1px solid #EDF2F7;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-        border-radius: 4px;
-        margin-top: 8px;
-    }
 
-    .file-preview-thumbnail {
-        width: 40px;
-        height: 40px;
-        margin-right: 8px;
-    }
-
-    .file-preview-thumbnail img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-    }
-
-    .file-preview-details {
-        flex: 1;
-    }
-
-    .file-preview-name {
-        font-weight: bold;
-    }
-
-    .file-preview-info {
-        color: #718096;
-        font-size: 0.875rem;
-    }
-
-    .file-preview-remove {
-        cursor: pointer;
-        color: #718096;
-    }
-    </style>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6">
-                    <form method="POST" action="{{ route('upload.invoice') }}" enctype="multipart/form-data">
-                        @csrf
-                        <div class="flex flex-col">
-                            <div class="relative">
-                                <label for="file-upload"
-                                    class="cursor-pointer bg-gray-800 text-white py-2 px-4 rounded-lg">
-                                    Choose a file
-                                </label>
-                                <input id="file-upload" type="file" name="invoice" class="hidden"
-                                    onchange="displayFilePreview(event)">
-                                <div id="file-preview" class="mt-2"></div>
-                            </div>
-                            <div class="mt-4 flex justify-end">
-                                <button type="submit" class="py-2 px-4 bg-blue-500 text-white rounded-lg">
-                                    Upload
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+            <x-file-upload />
 
+            @if(!session('pdfData'))
+            <div id="loading" class="hidden flex items-center justify-center" style="margin-top: 100px;">
+                <svg class="animate-spin h-6 w-6 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8z">
+                    </path>
+                </svg>
+                <span>Loading...</span>
             </div>
+            <button id="getInvoiceBtn" class="py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg mt-4"
+                onclick="getDataByRegex()">Get Invoice Data</button>
+            @endif
+
+            @if(session('pdfData'))
+            <x-pdf-data-form-test />
+            @endif
         </div>
     </div>
+
+
+    <script>
+    function getDataByRegex() {
+        var loadingElement = document.getElementById('loading');
+        var getInvoiceBtn = document.getElementById('getInvoiceBtn');
+        loadingElement.classList.remove('hidden');
+        getInvoiceBtn.style.display = 'none';
+
+        axios.get('http://localhost:3000/api/regex')
+            .then(function(response) {
+                console.log(response.data);
+
+                axios.post('/store-data-in-session', {
+                        data: response.data
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+    </script>
 
     @if(session('success'))
     <script>
@@ -109,43 +93,20 @@
     </script>
     @endif
 
-    <script>
-    function displayFilePreview(event) {
-        const fileInput = event.target;
-        const file = fileInput.files[0];
-        const filePreview = document.getElementById('file-preview');
+    <style>
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
 
-        if (file) {
-            const fileName = file.name;
-            const fileType = file.type;
-            const fileSize = Math.round(file.size / 1024);
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
 
-            const previewTemplate = `
-                    <div class="file-preview-item">
-                        <div class="file-preview-thumbnail">
-                            <img src="/icons/pdf-image.png" alt="File Preview">
-                        </div>
-                        <div class="file-preview-details">
-                            <div class="file-preview-name">${fileName}</div>
-                            <div class="file-preview-info">${fileSize} KB</div>
-                        </div>
-                        <div class="file-preview-remove" onclick="removeFilePreview(event)">
-                            <i class="fa-sharp fa-solid fa-xmark"></i>
-                        </div>
-                    </div>
-                `;
-
-            filePreview.innerHTML = previewTemplate;
-        } else {
-            filePreview.innerHTML = '';
+        100% {
+            transform: rotate(360deg);
         }
     }
+    </style>
 
-    function removeFilePreview(event) {
-        const filePreviewItem = event.currentTarget.parentNode;
-        const fileInput = document.getElementById('file-upload');
-        fileInput.value = '';
-        filePreviewItem.parentNode.removeChild(filePreviewItem);
-    }
-    </script>
 </x-app-layout>
