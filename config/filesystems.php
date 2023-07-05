@@ -38,7 +38,7 @@ return [
 
         'external' => [
             'driver' => 'local',
-            'root' => 'C:\xampp\htdocs\Invoice-Front-main',
+            'root' => env('PDF_STORAGE_PATH'),
         ],
 
         'public' => [
