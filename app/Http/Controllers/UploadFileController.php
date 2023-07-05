@@ -33,7 +33,7 @@ class UploadFileController extends Controller
 
         if ($request->file('invoice')->isValid()) {
             $pdfFile = $request->file('invoice');
-            $pdfFileName = $pdfFile->getClientOriginalName() . '_' . time() ;
+            $pdfFileName = time() . '_' . $pdfFile->getClientOriginalName(); 
 
             $storagePath = 'pdfs/';
             $pdfFile->storeAs($storagePath, $pdfFileName, 'external');
