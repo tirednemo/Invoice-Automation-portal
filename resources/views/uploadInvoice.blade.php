@@ -26,6 +26,8 @@
                 onclick="getDataByRegex()">Get Invoice Data</button>
             @endif
 
+
+            <!-- this form is for testing purpose -->
             @if(session('pdfData'))
             <x-pdf-data-form-test />
             @endif
