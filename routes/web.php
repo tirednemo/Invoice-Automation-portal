@@ -3,6 +3,7 @@
 use App\Http\Controllers\InvoiceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UploadFileController;
+use App\Http\Controllers\SessionController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -42,5 +43,6 @@ Route::get('/upload', function () {
 
 Route::post('/upload-pdf', [UploadFileController::class, 'uploadPDF'])->middleware(['auth'])->name('upload.invoice');
 
+Route::post('/store-data-in-session', [SessionController::class, 'storeDataInSession']);
 
 require __DIR__.'/auth.php';
