@@ -32,7 +32,7 @@
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->created_at->format('j M Y, g:i a') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->invoice_date->format('j M Y, g:i a') }}</div>
+                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->invoice_date}}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
                             <div class="text-sm leading-5 text-gray-900">

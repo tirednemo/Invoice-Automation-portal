@@ -12,6 +12,16 @@ class Invoice extends Model
     use HasFactory;
 
     protected $fillable = [
+        'invoice_date',
+        'invoice_no',
+        'customer_name',
+        'phone',
+        'email',
+        'billing_address',
+        'shipping_address',
+        'total', 10, 2,
+        'note',
+        'payee',
     ];
 
     public function user(): BelongsTo
