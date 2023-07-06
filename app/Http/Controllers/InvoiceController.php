@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Invoice;
+use App\Models\InvoiceItem;
+use App\Models\InvoiceItems;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -32,15 +35,36 @@ class InvoiceController extends Controller
      */
     public function store(Request $request)
     {
-        // $request->invoice()->fill($request->validated());
+        $invoice = new Invoice;
 
-        // if ($request->user()->isDirty('email')) {
-        //     $request->user()->email_verified_at = null;
+        $invoice->user_id = $request->user()->id;
+        $invoice->invoice_date = $request->invoice_date;
+        $invoice->invoice_no = $request->invoice_number;
+        $invoice->customer_name = $request->customer_name;
+        $invoice->phone = $request->phone;
+        $invoice->email = $request->email;
+        $invoice->billing_address = $request->billing_address;
+        $invoice->shipping_address = $request->shipping_address;
+        $invoice->total = $request->total_amount;
+        $invoice->note = $request->note;
+        $invoice->payee = "Robi";
+        $invoice->status = "Due";
+
+        $invoice->save();
+
+        // foreach ($request['item_details'] as $index => $item) {
+        //     $item = new InvoiceItem;
+
+        //     $item->invoice_id = $invoice->id;
+        //     $item->item_name = $request->item_details[$index]['name'];
+        //     $item->quantity = $request->item_details[$index]['unit_price'];
+        //     $item->unit_price = $request->item_details[$index]['quantity'];
+        //     $item->amount = $request->item_details[$index]['amount'];
+
+        //     $item->save();
         // }
 
-        // $request->invoice()->save();
-
-        // return Redirect::to('/dashboard');
+        return redirect('dashboard');
     }
 
     /**
