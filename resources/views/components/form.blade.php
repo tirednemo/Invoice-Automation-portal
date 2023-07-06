@@ -144,8 +144,10 @@ $size = count($pdfData['item_details']);
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
+        const removeItemDetailsBtn = document.getElementById('remove-item-details-btn');
         const addItemDetailsBtn = document.getElementById('add-item-details-btn');
         const itemDetailsContainer = document.getElementById('item-details-container');
+    
         var index = "<?php echo $size; ?>";
 
         addItemDetailsBtn.addEventListener('click', function() {
