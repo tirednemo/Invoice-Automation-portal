@@ -43,6 +43,10 @@ Route::get('/upload', function () {
     return view('uploadInvoice');
 })->middleware(['auth'])->name('uploadInvoice');
 
+Route::get('/view', function () {
+    return view('viewInvoice');
+})->middleware(['auth'])->name('viewInvoice');
+
 Route::post('/upload-pdf', [UploadFileController::class, 'uploadPDF'])->middleware(['auth'])->name('upload.invoice');
 
 Route::post('/store-data-in-session', [SessionController::class, 'storeDataInSession']);
