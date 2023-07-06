@@ -26,7 +26,7 @@
             </div>
 
 
-
+            @if(session('success'))
             <div id="buttonDiv" class="bg-white shadow-md rounded-lg p-6" style="margin-top: 15px;">
                 <h1 class="text-2xl text-center font-bold mb-3">Choose Parsing Algorithm</h1>
                 <div class="flex">
@@ -44,6 +44,7 @@
                     </x-primary-button>
                 </div>
             </div>
+            @endif
 
             @endif
 
