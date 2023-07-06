@@ -1,6 +1,6 @@
 <div class="max-w-3xl mx-auto mt-10 p-4 sm:p-6 lg:p-8">
     <h1 class="text-2xl text-center font-bold mb-3">Invoice Details</h1>
-    <form method="POST" action="{{ route('invoices.store') }}" class="bg-slate-200 p-5 rounded-lg shadow-md relative">
+    <form method="POST" action="{{ route('invoices.store') }}" class="bg-slate-200 p-5 rounded-lg shadow-md relative" onsubmit="return validateForm()">
         @csrf
 
         <div class="grid grid-cols-2 gap-4">
@@ -65,7 +65,7 @@
                         <input type="number" name="amount[]" class="form-input rounded-md shadow-sm w-32">
                     </div>
                     <div class="mt-6">
-                        <x-primary-button id="add-item-details-btn" class="mt-2 px-7">+</x-primary-buttonn>
+                        <x-primary-button type="button" id="add-item-details-btn" class="w-12 mt-2 px-5">+</x-primary-buttonn>
                     </div>
                 </div>
             </div>
@@ -82,7 +82,7 @@
         </div>
 
         <div class="flow-root">
-            <x-primary-button class="px-6 float-right">
+            <x-primary-button type="submit" id="save-invoice-btn" class="px-6 float-right">
                 {{ __('Save') }}
             </x-primary-button>
         </div>
@@ -117,4 +117,32 @@
             rowElements[rowElements.length - 1].appendChild(addItemDetailsBtn);
         });
     });
+
+    function validateForm() {
+        var totalAmount = parseFloat(document.getElementById('total_amount').value);
+        var itemAmounts = document.getElementsByName('amount[]');
+        var itemTotal = 0;
+
+        for (var i = 0; i < itemAmounts.length; i++) {
+            var itemAmount = parseFloat(itemAmounts[i].value);
+            itemTotal += itemAmount;
+        }
+
+        if (totalAmount !== itemTotal) {
+            Toastify({
+                text: "Total amount does not match the sum of item amounts.",
+                duration: 3000,
+                close: true,
+                gravity: 'bottom',
+                position: 'right',
+                style: {
+                    background: 'red'
+                },
+                stopOnFocus: true
+            }).showToast();
+            return false;
+        }
+
+        return true;
+    }
 </script>
