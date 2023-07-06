@@ -1,5 +1,6 @@
 @php
 $pdfData = session('pdfData');
+$size = count($pdfData['item_details']);
 @endphp
 
 <div class="bg-white shadow-md rounded-lg p-6" style="margin-top: 15px;" id="pdfDataForm">
@@ -69,19 +70,19 @@ $pdfData = session('pdfData');
                     <div class="grid grid-cols-4 gap-3 item-details-row">
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-1">Item Name</label>
-                            <input type="text" name="item_details[][name]" value="{{ $item['name'] }}" class="mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="text" name="item_details[{{$index}}][name]" value="{{ $item['name'] }}" class="mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-1">Unit Price</label>
-                            <input type="number" name="item_details[][unit_price]" value="{{ $item['unit_price'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="number" name="item_details[{{$index}}][unit_price]" value="{{ $item['unit_price'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-1">Quantity</label>
-                            <input type="number" name="item_details[][quantity]" value="{{ $item['quantity'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="number" name="item_details[{{$index}}][quantity]" value="{{ $item['quantity'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div>
                             <label class="block text-gray-700 text-sm font-bold mb-1">Amount</label>
-                            <input type="number" name="item_details[][amount]" value="{{ $item['amount'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="number" name="item_details[{{$index}}][amount]" value="{{ $item['amount'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                     </div>
                     @endforeach
@@ -123,8 +124,10 @@ $pdfData = session('pdfData');
     document.addEventListener('DOMContentLoaded', function() {
         const addItemDetailsBtn = document.getElementById('add-item-details-btn');
         const itemDetailsContainer = document.getElementById('item-details-container');
+        var index = "<?php echo $size; ?>";
 
         addItemDetailsBtn.addEventListener('click', function() {
+            index++;
             const itemDetailsRow = document.createElement('div');
             itemDetailsRow.className = 'grid grid-cols-4 gap-3 item-details-row';
 
@@ -140,7 +143,7 @@ $pdfData = session('pdfData');
 
                 const input = document.createElement('input');
                 input.type = i === 0 ? 'text' : 'number';
-                input.name = `item_details[][${inputFields[i]}]`;
+                input.name = `item_details[${index}][${inputFields[i]}]`;
                 input.className = 'mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md';
 
                 inputDiv.appendChild(label);
@@ -157,28 +160,27 @@ $pdfData = session('pdfData');
 
     function validateForm() {
         var totalAmount = parseFloat(document.getElementById('total_amount').value);
-        var itemAmounts = document.getElementsByName("item_details[][amount]");
+        var itemAmounts = document.querySelectorAll('item_details[][amount]');
         var itemTotal = 0;
 
-        for (let i = 0; i < itemAmounts.length; i++) {
-
+        for (let i = 0; i < itemAmounts.lenghth; i++) {
             itemTotal += parseFloat(itemAmounts[i].value);
         }
 
-        if (totalAmount !== itemTotal) {
-            Toastify({
-                text: "Total amount does not match the sum of item amounts.",
-                duration: 3000,
-                close: true,
-                gravity: 'bottom',
-                position: 'right',
-                style: {
-                    background: 'red'
-                },
-                stopOnFocus: true
-            }).showToast();
-            return false;
-        }
+        // if (totalAmount !== itemTotal) {
+        //     Toastify({
+        //         text: "Total amount does not match the sum of item amounts.",
+        //         duration: 3000,
+        //         close: true,
+        //         gravity: 'bottom',
+        //         position: 'right',
+        //         style: {
+        //             background: 'red'
+        //         },
+        //         stopOnFocus: true
+        //     }).showToast();
+        //     return false;
+        // }
 
         return true;
     }
