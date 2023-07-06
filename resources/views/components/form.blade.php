@@ -103,11 +103,18 @@ $pdfData = session('pdfData');
                     </div>
                     @endforeach
                 </div>
-                <div class="mt-6">
-                    <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
+                <div class="mt-6" id="add-remove-buttons">
+                    <div class="grid grid-cols-2 gap-2">
+                        <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
                flex items-center justify-center hover:text-blue-500">
-                        Add Another Item
-                    </x-primary-button>
+                            Add Another Item
+                        </x-primary-button>
+                        <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
+               flex items-center justify-center hover:text-blue-500">
+                            Remove An Item
+                        </x-primary-button>
+                    </div>
+
                 </div>
 
             </div>
@@ -142,6 +149,7 @@ $pdfData = session('pdfData');
 document.addEventListener('DOMContentLoaded', function() {
     const addItemDetailsBtn = document.getElementById('add-item-details-btn');
     const itemDetailsContainer = document.getElementById('item-details-container');
+    const addRemoveButtons = document.getElementById('add-remove-buttons')
 
     addItemDetailsBtn.addEventListener('click', function() {
         const itemDetailsRow = document.createElement('div');
@@ -171,7 +179,7 @@ document.addEventListener('DOMContentLoaded', function() {
         itemDetailsContainer.appendChild(itemDetailsRow);
 
         const rowElements = document.querySelectorAll(".item-details-row");
-        itemDetailsContainer.append(addItemDetailsBtn);
+        itemDetailsContainer.append(addRemoveButtons);
     });
 });
 
