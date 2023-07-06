@@ -22,20 +22,22 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-Route::resource('invoices', InvoiceController::class)
-    ->only(['index', 'store'])
-    ->middleware(['auth', 'verified']);
-
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/dashboard', [InvoiceController::class, 'index'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::resource('invoices', InvoiceController::class)
+    ->only(['index', 'store'])
+    ->middleware(['auth', 'verified']);
 
 Route::get('/upload', function () {
     return view('uploadInvoice');
@@ -45,4 +47,4 @@ Route::post('/upload-pdf', [UploadFileController::class, 'uploadPDF'])->middlewa
 
 Route::post('/store-data-in-session', [SessionController::class, 'storeDataInSession']);
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
