@@ -36,11 +36,11 @@
                         REGEX
                     </x-primary-button>
                     <x-primary-button id="getInvoiceBtn1" class="flex-grow mx-2 flex justify-center"
-                        onclick="getDataByRegex()">
+                        onclick="getDataByOCR()">
                         OCR
                     </x-primary-button>
                     <x-primary-button id="getInvoiceBtn2" class="flex-grow mx-2 flex justify-center"
-                        onclick="getDataByRegex()">
+                        onclick="getDataByDL()">
                         DL
                     </x-primary-button>
                 </div>
@@ -63,6 +63,70 @@
 
     <script>
     function getDataByRegex() {
+        var loadingElement = document.getElementById('loading');
+        var buttonDiv = document.getElementById('buttonDiv')
+        let pdfFileName = document.getElementById('pdfFileName').value
+
+        loadingElement.classList.remove('hidden');
+        buttonDiv.style.display = 'none';
+
+        axios.get(`http://localhost:3000/api/regex?`, {
+                params: {
+                    pdfFileName: pdfFileName
+                }
+            })
+            .then(function(response) {
+                console.log(response.data);
+
+                axios.post('/store-data-in-session', {
+                        data: response.data
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    function getDataByOCR() {
+        var loadingElement = document.getElementById('loading');
+        var buttonDiv = document.getElementById('buttonDiv')
+        let pdfFileName = document.getElementById('pdfFileName').value
+
+        loadingElement.classList.remove('hidden');
+        buttonDiv.style.display = 'none';
+
+        axios.get(`http://localhost:3000/api/regex?`, {
+                params: {
+                    pdfFileName: pdfFileName
+                }
+            })
+            .then(function(response) {
+                console.log(response.data);
+
+                axios.post('/store-data-in-session', {
+                        data: response.data
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
+    function getDataByDL() {
         var loadingElement = document.getElementById('loading');
         var buttonDiv = document.getElementById('buttonDiv')
         let pdfFileName = document.getElementById('pdfFileName').value
