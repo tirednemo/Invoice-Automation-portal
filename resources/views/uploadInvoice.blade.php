@@ -29,10 +29,10 @@
                 <x-primary-button id="getInvoiceBtn" class="w-20  mx-5" onclick="getDataByRegex()">
                     REGEX
                 </x-primary-button>
-                <x-primary-button id="getInvoiceBtn" class="w-20 px-6 mx-5" onclick="getDataByRegex()">
+                <x-primary-button id="getInvoiceBtn1" class="w-20 px-6 mx-5" onclick="getDataByRegex()">
                     OCR
                 </x-primary-button>
-                <x-primary-button id="getInvoiceBtn" class="w-20 px-8 mx-5" onclick="getDataByRegex()">
+                <x-primary-button id="getInvoiceBtn2" class="w-20 px-8 mx-5" onclick="getDataByRegex()">
                     DL
                 </x-primary-button>
             </div>
@@ -55,8 +55,13 @@
     function getDataByRegex() {
         var loadingElement = document.getElementById('loading');
         var getInvoiceBtn = document.getElementById('getInvoiceBtn');
+        var getInvoiceBtn1 = document.getElementById('getInvoiceBtn1');
+        var getInvoiceBtn2 = document.getElementById('getInvoiceBtn2');
+
         loadingElement.classList.remove('hidden');
         getInvoiceBtn.style.display = 'none';
+        getInvoiceBtn1.style.display = 'none';
+        getInvoiceBtn2.style.display = 'none';
 
         axios.get('http://localhost:3000/api/regex')
             .then(function(response) {
