@@ -12,7 +12,8 @@
                 <thead>
                     <tr>
                         <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Invoice ID</th>
-                        <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Created At</th>
+                        <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Uploaded At</th>
+                        <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Purchased At</th>
                         <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Ship To</th>
                         <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Payee</th>
                         <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Total</th>
@@ -29,6 +30,9 @@
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->created_at->format('j M Y, g:i a') }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-no-wrap">
+                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->invoice_date->format('j M Y, g:i a') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
                             <div class="text-sm leading-5 text-gray-900">

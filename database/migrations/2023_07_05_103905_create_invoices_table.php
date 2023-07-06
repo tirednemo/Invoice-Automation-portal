@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
-            $table->date('invoice_date');
+            $table->timestamp('invoice_date');
             $table->string('invoice_no');
             $table->string('customer_name');
             $table->string('phone');
