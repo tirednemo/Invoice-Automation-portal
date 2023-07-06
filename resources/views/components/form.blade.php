@@ -184,7 +184,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     removeItemDetailsBtn.addEventListener('click', function() {
-
+        const itemDetailsRows = itemDetailsContainer.getElementsByClassName('item-details-row');
+        if (itemDetailsRows.length > 0) {
+            itemDetailsRows[itemDetailsRows.length - 1].remove();
+        }
     });
 });
 
