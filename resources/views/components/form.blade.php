@@ -109,7 +109,7 @@ $pdfData = session('pdfData');
                flex items-center justify-center hover:text-blue-500">
                             Add Another Item
                         </x-primary-button>
-                        <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
+                        <x-primary-button type="button" id="remove-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
                flex items-center justify-center hover:text-blue-500">
                             Remove An Item
                         </x-primary-button>
@@ -148,6 +148,7 @@ $pdfData = session('pdfData');
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     const addItemDetailsBtn = document.getElementById('add-item-details-btn');
+    const removeItemDetailsBtn = document.getElementById('remove-item-details-btn');
     const itemDetailsContainer = document.getElementById('item-details-container');
     const addRemoveButtons = document.getElementById('add-remove-buttons')
 
@@ -180,6 +181,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const rowElements = document.querySelectorAll(".item-details-row");
         itemDetailsContainer.append(addRemoveButtons);
+    });
+
+    removeItemDetailsBtn.addEventListener('click', function() {
+
     });
 });
 
