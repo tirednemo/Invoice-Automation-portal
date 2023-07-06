@@ -5,6 +5,7 @@ $pdfData = session('pdfData');
 <div class="bg-white shadow-md rounded-lg p-6" style="margin-top: 15px;" id="pdfDataForm">
     <h1 class="text-2xl text-center font-bold mb-3">Invoice Details</h1>
     <form method="POST">
+
         @csrf
 
         <div class="mb-6">
@@ -70,6 +71,7 @@ $pdfData = session('pdfData');
         </div>
 
 
+
         <div class="mb-6">
             <div class="mb-8 mt-4">
                 <h2 class="text-lg font-bold mb-2">Item Details</h2>
@@ -128,7 +130,7 @@ $pdfData = session('pdfData');
         </div>
 
         <div class="flow-root">
-            <x-primary-button class="px-6 float-right">
+            <x-primary-button type="submit" id="save-invoice-btn" class="px-6 float-right">
                 {{ __('Save') }}
             </x-primary-button>
         </div>
@@ -172,4 +174,5 @@ document.addEventListener('DOMContentLoaded', function() {
         rowElements[rowElements.length - 1].appendChild(addItemDetailsBtn);
     });
 });
+
 </script>
