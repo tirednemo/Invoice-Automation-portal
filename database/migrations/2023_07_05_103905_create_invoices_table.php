@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('note');
             $table->string('payee');
             $table->string('status');
+            $table->string('pdf_name');
             $table->timestamps();
         });
     }

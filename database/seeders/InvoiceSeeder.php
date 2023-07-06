@@ -27,6 +27,7 @@ class InvoiceSeeder extends Seeder
             'note' => 'no discount',
             'payee' => 'Earth Dept Store',
             'status' => 'Completed',
+            'pdf_name' => 'time_sample_1.pdf',
         ]);
 
         Invoice::create([
@@ -43,6 +44,7 @@ class InvoiceSeeder extends Seeder
             'note' => 'no discount',
             'payee' => '9/11',
             'status' => 'Due',
+            'pdf_name' => 'time_sample_2.pdf',
         ]);
     }
 }
