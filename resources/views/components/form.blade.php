@@ -1,6 +1,6 @@
 <div class="max-w-3xl mx-auto mt-10 p-4 sm:p-6 lg:p-8">
     <h1 class="text-2xl text-center font-bold mb-3">Invoice Details</h1>
-    <form method="POST" action="{{ route('invoices.store') }}" class="bg-slate-200 p-6 rounded-lg shadow-md relative">
+    <form method="POST" action="{{ route('invoices.store') }}" class="bg-slate-200 p-5 rounded-lg shadow-md relative">
         @csrf
 
         <div class="grid grid-cols-2 gap-4">
