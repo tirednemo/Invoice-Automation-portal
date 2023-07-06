@@ -18,7 +18,7 @@ After the PHP dependencies are installed, install the JavaScript dependencies us
 
 ## Configure the Environment
 Copy the .env.example file and rename it to .env: `cp .env.example .env`\
-Open the .env file in a text editor and configure the necessary environment variables, such as database connection details. 
+Open the .env file in a text editor and configure the necessary environment variables, such as database connection details and PDF storage path. 
 
 ## Step 4: Migrate the Database
 Before running the application, you need to migrate the database tables. Run the following command: `php artisan migrate`
