@@ -23,11 +23,9 @@
                 </svg>
                 <span>Loading...</span>
             </div>
-            <!-- <button id="getInvoiceBtn" class="py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg mt-4"
-                onclick="getDataByRegex()">Get Invoice Data</button> -->
 
-            <h1 class="text-3xl text-center font-bold mb-3">Choose Parsing Algorithm</h1>
-            <div class="flex justify-center">
+            <!-- <h1 class="text-2xl text-center font-bold mb-3 mt-3">Choose Parsing Algorithm</h1> -->
+            <div class="flex justify-center my-6">
                 <x-primary-button id="getInvoiceBtn" class="w-20  mx-5" onclick="getDataByRegex()">
                     REGEX
                 </x-primary-button>
@@ -44,11 +42,11 @@
 
             <!-- this form is for testing purpose -->
             @if(session('pdfData'))
-            <x-pdf-data-form-test />
+            <x-form />
             @endif
 
 
-            <x-form />
+
         </div>
     </div>
 
