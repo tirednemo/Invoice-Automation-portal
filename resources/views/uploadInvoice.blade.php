@@ -24,18 +24,18 @@
                 </svg>
                 <span>Loading...</span>
             </div>
-            <!-- <button id="getInvoiceBtn" class="py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg mt-4"
-                onclick="getDataByRegex()">Get Invoice Data</button> -->
 
-            <h1 class="text-2xl text-center font-bold mt-10 mb-3">Choose Parsing Algorithm</h1>
-            <div class="flex justify-center">
+
+            <!-- <h1 class="text-2xl text-center font-bold mb-3 mt-3">Choose Parsing Algorithm</h1> -->
+            <div class="flex justify-center my-6">
+
                 <x-primary-button id="getInvoiceBtn" class="w-20  mx-5" onclick="getDataByRegex()">
                     REGEX
                 </x-primary-button>
-                <x-primary-button id="getInvoiceBtn" class="w-20 px-6 mx-5" onclick="getDataByRegex()">
+                <x-primary-button id="getInvoiceBtn1" class="w-20 px-6 mx-5" onclick="getDataByRegex()">
                     OCR
                 </x-primary-button>
-                <x-primary-button id="getInvoiceBtn" class="w-20 px-8 mx-5" onclick="getDataByRegex()">
+                <x-primary-button id="getInvoiceBtn2" class="w-20 px-8 mx-5" onclick="getDataByRegex()">
                     DL
                 </x-primary-button>
             </div>
@@ -45,41 +45,48 @@
 
             <!-- this form is for testing purpose -->
             @if(session('pdfData'))
-            <x-pdf-data-form-test />
+            <x-form />
             @endif
 
 
-            <x-form />
+
         </div>
     </div>
 
 
     <script>
-        function getDataByRegex() {
-            var loadingElement = document.getElementById('loading');
-            var getInvoiceBtn = document.getElementById('getInvoiceBtn');
-            loadingElement.classList.remove('hidden');
-            getInvoiceBtn.style.display = 'none';
 
-            axios.get('http://localhost:3000/api/regex')
-                .then(function(response) {
-                    console.log(response.data);
+    function getDataByRegex() {
+        var loadingElement = document.getElementById('loading');
+        var getInvoiceBtn = document.getElementById('getInvoiceBtn');
+        var getInvoiceBtn1 = document.getElementById('getInvoiceBtn1');
+        var getInvoiceBtn2 = document.getElementById('getInvoiceBtn2');
 
-                    axios.post('/store-data-in-session', {
-                            data: response.data
-                        })
-                        .then(function(response) {
-                            console.log(response);
-                            location.reload();
-                        })
-                        .catch(function(error) {
-                            console.log(error);
-                        });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }
+        loadingElement.classList.remove('hidden');
+        getInvoiceBtn.style.display = 'none';
+        getInvoiceBtn1.style.display = 'none';
+        getInvoiceBtn2.style.display = 'none';
+
+        axios.get('http://localhost:3000/api/regex')
+            .then(function(response) {
+                console.log(response.data);
+
+                axios.post('/store-data-in-session', {
+                        data: response.data
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
+
     </script>
 
     @if(session('success'))
