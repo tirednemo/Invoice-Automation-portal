@@ -14,13 +14,17 @@ $size = count($pdfData['item_details']);
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label for="invoice_date" class="block text-gray-700 text-sm font-bold mb-2">Invoice Date</label>
-                    <input id="invoice_date" type="date" name="invoice_date" value="{{ date('Y-m-d', strtotime($pdfData['invoice_info']['date'])) }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input id="invoice_date" type="date" name="invoice_date"
+                        value="{{ date('Y-m-d', strtotime($pdfData['invoice_info']['date'])) }}"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="invoice_number" class="block text-gray-700 text-sm font-bold mb-2">Invoice
                         Number</label>
-                    <input id="invoice_number" type="text" name="invoice_number" value="{{ $pdfData['invoice_info']['number'] }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input id="invoice_number" type="text" name="invoice_number"
+                        value="{{ $pdfData['invoice_info']['number'] }}"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
             </div>
         </div>
@@ -32,29 +36,38 @@ $size = count($pdfData['item_details']);
             <div class="grid grid-cols-2 gap-4">
                 <div class="col-span-2">
                     <label for="customer_name" class="block text-gray-700 text-sm font-bold mb-2">Customer Name</label>
-                    <input id="customer_name" type="text" name="customer_name" value="{{ $pdfData['customer_info']['name'] }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input id="customer_name" type="text" name="customer_name"
+                        value="{{ $pdfData['customer_info']['name'] }}"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
-                    <input id="phone" type="text" maxlength="11" name="phone" value="{{ $pdfData['customer_info']['phone'] }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input id="phone" type="text" maxlength="11" name="phone"
+                        value="{{ $pdfData['customer_info']['phone'] }}"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                    <input id="email" type="email" name="email" value="{{ $pdfData['customer_info']['email'] }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                    <input id="email" type="email" name="email" value="{{ $pdfData['customer_info']['email'] }}"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="billing_address" class="block text-gray-700 text-sm font-bold mb-2">Billing
                         Address</label>
-                    <textarea id="billing_address" type="text" name="billing_address" value="{{ $pdfData['customer_info']['billing_address'] }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['customer_info']['billing_address'] }}</textarea>
+                    <textarea id="billing_address" type="text" name="billing_address"
+                        value="{{ $pdfData['customer_info']['billing_address'] }}"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['customer_info']['billing_address'] }}</textarea>
                 </div>
 
                 <div>
                     <label for="shipping_address" class="block text-gray-700 text-sm font-bold mb-2">Shipping
                         Address</label>
-                    <textarea id="shipping_address" type="text" name="shipping_address" value="{{ $pdfData['customer_info']['shipping_address'] }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['customer_info']['shipping_address'] }}</textarea>
+                    <textarea id="shipping_address" type="text" name="shipping_address"
+                        value="{{ $pdfData['customer_info']['shipping_address'] }}"
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['customer_info']['shipping_address'] }}</textarea>
                 </div>
             </div>
 
@@ -87,11 +100,18 @@ $size = count($pdfData['item_details']);
                     </div>
                     @endforeach
                 </div>
-                <div class="mt-6">
-                    <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
+                <div class="mt-6" id="add-remove-buttons">
+                    <div class="grid grid-cols-2 gap-2">
+                        <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
                flex items-center justify-center hover:text-blue-500">
-                        Add Another Item
-                    </x-primary-button>
+                            Add Another Item
+                        </x-primary-button>
+                        <x-primary-button type="button" id="remove-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
+               flex items-center justify-center hover:text-blue-500">
+                            Remove An Item
+                        </x-primary-button>
+                    </div>
+
                 </div>
 
             </div>
@@ -103,12 +123,14 @@ $size = count($pdfData['item_details']);
 
         <div class="mb-4">
             <label for="total_amount" class="block text-gray-700 text-sm font-bold mb-2">Total Amount</label>
-            <input id="total_amount" type="number" name="total_amount" value="{{ $pdfData['total_amount'] }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+            <input id="total_amount" type="number" name="total_amount" value="{{ $pdfData['total_amount'] }}"
+                class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </div>
 
         <div class="mb-4">
             <label for="note" class="block text-gray-700 text-sm font-bold mb-2">Note</label>
-            <textarea id="note" name="note" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['note'] }}</textarea>
+            <textarea id="note" name="note"
+                class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['note'] }}</textarea>
         </div>
 
         <div class="flow-root">
@@ -131,57 +153,65 @@ $size = count($pdfData['item_details']);
             const itemDetailsRow = document.createElement('div');
             itemDetailsRow.className = 'grid grid-cols-4 gap-3 item-details-row';
 
-            const fieldNames = ['Item Name', 'Unit Price', 'Quantity', 'Amount'];
-            const inputFields = ['name', 'unit_price', 'quantity', 'amount'];
+        const fieldNames = ['Item Name', 'Unit Price', 'Quantity', 'Amount'];
+        const inputFields = ['name', 'unit_price', 'quantity', 'amount'];
 
-            for (let i = 0; i < fieldNames.length; i++) {
-                const inputDiv = document.createElement('div');
+        for (let i = 0; i < fieldNames.length; i++) {
+            const inputDiv = document.createElement('div');
 
-                const label = document.createElement('label');
-                label.className = 'block text-gray-700 text-sm font-bold mb-1';
-                label.textContent = fieldNames[i];
+            const label = document.createElement('label');
+            label.className = 'block text-gray-700 text-sm font-bold mb-1';
+            label.textContent = fieldNames[i];
 
                 const input = document.createElement('input');
                 input.type = i === 0 ? 'text' : 'number';
                 input.name = `item_details[${index}][${inputFields[i]}]`;
                 input.className = 'mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md';
 
-                inputDiv.appendChild(label);
-                inputDiv.appendChild(input);
-                itemDetailsRow.appendChild(inputDiv);
-            }
-
-            itemDetailsContainer.appendChild(itemDetailsRow);
-
-            const rowElements = document.querySelectorAll(".item-details-row");
-            rowElements[rowElements.length - 1].appendChild(addItemDetailsBtn);
-        });
-    });
-
-    function validateForm() {
-        var totalAmount = parseFloat(document.getElementById('total_amount').value);
-        var itemAmounts = document.querySelectorAll('item_details[][amount]');
-        var itemTotal = 0;
-
-        for (let i = 0; i < itemAmounts.lenghth; i++) {
-            itemTotal += parseFloat(itemAmounts[i].value);
+            inputDiv.appendChild(label);
+            inputDiv.appendChild(input);
+            itemDetailsRow.appendChild(inputDiv);
         }
 
-        // if (totalAmount !== itemTotal) {
-        //     Toastify({
-        //         text: "Total amount does not match the sum of item amounts.",
-        //         duration: 3000,
-        //         close: true,
-        //         gravity: 'bottom',
-        //         position: 'right',
-        //         style: {
-        //             background: 'red'
-        //         },
-        //         stopOnFocus: true
-        //     }).showToast();
-        //     return false;
-        // }
+        itemDetailsContainer.appendChild(itemDetailsRow);
 
-        return true;
+        const rowElements = document.querySelectorAll(".item-details-row");
+        itemDetailsContainer.append(addRemoveButtons);
+    });
+
+    removeItemDetailsBtn.addEventListener('click', function() {
+        const itemDetailsRows = itemDetailsContainer.getElementsByClassName('item-details-row');
+        if (itemDetailsRows.length > 0) {
+            itemDetailsRows[itemDetailsRows.length - 1].remove();
+        }
+    });
+});
+
+function validateForm() {
+    var totalAmount = parseFloat(document.getElementById('total_amount').value);
+    var itemAmounts = document.getElementsByName("item_details[][amount]");
+    var itemTotal = 0;
+
+    for (let i = 0; i < itemAmounts.length; i++) {
+
+        itemTotal += parseFloat(itemAmounts[i].value);
     }
+
+    // if (totalAmount !== itemTotal) {
+    //     Toastify({
+    //         text: "Total amount does not match the sum of item amounts.",
+    //         duration: 3000,
+    //         close: true,
+    //         gravity: 'bottom',
+    //         position: 'right',
+    //         style: {
+    //             background: 'red'
+    //         },
+    //         stopOnFocus: true
+    //     }).showToast();
+    //     return false;
+    // }
+
+    return true;
+}
 </script>

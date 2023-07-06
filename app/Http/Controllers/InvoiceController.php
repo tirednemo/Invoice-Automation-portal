@@ -6,8 +6,10 @@ use App\Models\User;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use App\Models\InvoiceItems;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\View\View;
 
 class InvoiceController extends Controller
@@ -64,6 +66,8 @@ class InvoiceController extends Controller
 
             $item->save();
         }
+
+        Session::forget(['pdfFileName', 'pdfData']);
 
         return redirect('dashboard');
     }
