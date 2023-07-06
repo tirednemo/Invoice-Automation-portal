@@ -28,6 +28,8 @@
 
             @if(session('success'))
             <div id="buttonDiv" class="bg-white shadow-md rounded-lg p-6" style="margin-top: 15px;">
+
+                <input type="text" id="pfdFileName" hidden value="{{ session('pdfData') }}">
                 <h1 class="text-2xl text-center font-bold mb-3">Choose Parsing Algorithm</h1>
                 <div class="flex">
                     <x-primary-button id="getInvoiceBtn" class="flex-grow mx-2 flex justify-center"
@@ -64,11 +66,12 @@
     function getDataByRegex() {
         var loadingElement = document.getElementById('loading');
         var buttonDiv = document.getElementById('buttonDiv')
+        var pdfFileName = document.getElementById('pdfFileName').value
 
         loadingElement.classList.remove('hidden');
         buttonDiv.style.display = 'none';
 
-        axios.get('http://localhost:3000/api/regex')
+        axios.get('http://localhost:3000/api/regex?' + pdfFileName)
             .then(function(response) {
                 console.log(response.data);
 
