@@ -26,18 +26,23 @@
             </div>
 
 
-            <!-- <h1 class="text-2xl text-center font-bold mb-3 mt-3">Choose Parsing Algorithm</h1> -->
-            <div class="flex justify-center my-6">
 
-                <x-primary-button id="getInvoiceBtn" class="w-20  mx-5" onclick="getDataByRegex()">
-                    REGEX
-                </x-primary-button>
-                <x-primary-button id="getInvoiceBtn1" class="w-20 px-6 mx-5" onclick="getDataByRegex()">
-                    OCR
-                </x-primary-button>
-                <x-primary-button id="getInvoiceBtn2" class="w-20 px-8 mx-5" onclick="getDataByRegex()">
-                    DL
-                </x-primary-button>
+            <div id="buttonDiv" class="bg-white shadow-md rounded-lg p-6" style="margin-top: 15px;">
+                <h1 class="text-2xl text-center font-bold mb-3">Choose Parsing Algorithm</h1>
+                <div class="flex">
+                    <x-primary-button id="getInvoiceBtn" class="flex-grow mx-2 flex justify-center"
+                        onclick="getDataByRegex()">
+                        REGEX
+                    </x-primary-button>
+                    <x-primary-button id="getInvoiceBtn1" class="flex-grow mx-2 flex justify-center"
+                        onclick="getDataByRegex()">
+                        OCR
+                    </x-primary-button>
+                    <x-primary-button id="getInvoiceBtn2" class="flex-grow mx-2 flex justify-center"
+                        onclick="getDataByRegex()">
+                        DL
+                    </x-primary-button>
+                </div>
             </div>
 
             @endif
@@ -55,17 +60,12 @@
 
 
     <script>
-
     function getDataByRegex() {
         var loadingElement = document.getElementById('loading');
-        var getInvoiceBtn = document.getElementById('getInvoiceBtn');
-        var getInvoiceBtn1 = document.getElementById('getInvoiceBtn1');
-        var getInvoiceBtn2 = document.getElementById('getInvoiceBtn2');
+        var buttonDiv = document.getElementById('buttonDiv')
 
         loadingElement.classList.remove('hidden');
-        getInvoiceBtn.style.display = 'none';
-        getInvoiceBtn1.style.display = 'none';
-        getInvoiceBtn2.style.display = 'none';
+        buttonDiv.style.display = 'none';
 
         axios.get('http://localhost:3000/api/regex')
             .then(function(response) {
@@ -86,55 +86,54 @@
                 console.log(error);
             });
     }
-
     </script>
 
     @if(session('success'))
     <script>
-        Toastify({
-            text: "{{ session('success') }}",
-            duration: 3000,
-            close: true,
-            gravity: 'top',
-            position: 'right',
-            style: {
-                background: 'black'
-            },
-            stopOnFocus: true
-        }).showToast();
+    Toastify({
+        text: "{{ session('success') }}",
+        duration: 3000,
+        close: true,
+        gravity: 'top',
+        position: 'right',
+        style: {
+            background: 'black'
+        },
+        stopOnFocus: true
+    }).showToast();
     </script>
     @endif
 
     @if(session('error'))
     <script>
-        Toastify({
-            text: "{{ session('error') }}",
-            duration: 3000,
-            close: true,
-            gravity: 'top',
-            position: 'right',
-            style: {
-                background: 'red'
-            },
-            stopOnFocus: true
-        }).showToast();
+    Toastify({
+        text: "{{ session('error') }}",
+        duration: 3000,
+        close: true,
+        gravity: 'top',
+        position: 'right',
+        style: {
+            background: 'red'
+        },
+        stopOnFocus: true
+    }).showToast();
     </script>
     @endif
 
     <style>
-        .animate-spin {
-            animation: spin 1s linear infinite;
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+        100% {
+            transform: rotate(360deg);
         }
+    }
     </style>
 
 </x-app-layout>
