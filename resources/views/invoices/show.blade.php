@@ -4,7 +4,7 @@
 
             {{-- <x-invoice.pdf-view /> --}}
 
-            <x-invoice.form-view />
+            <x-invoice.form-view :invoice="$invoice"  />
         </div>
     </div>
 </x-app-layout>

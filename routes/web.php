@@ -43,9 +43,8 @@ Route::get('/upload', function () {
     return view('uploadInvoice');
 })->middleware(['auth'])->name('uploadInvoice');
 
-Route::get('/details', function () {
-    return view('viewInvoice');
-})->middleware(['auth'])->name('viewInvoice');
+Route::get('/invoices/{invoice}', [InvoiceController::class, 'show'])
+    ->middleware(['auth'])->name('invoices.show');
 
 Route::post('/upload-pdf', [UploadFileController::class, 'uploadPDF'])->middleware(['auth'])->name('upload.invoice');
 
