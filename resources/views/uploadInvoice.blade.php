@@ -2,7 +2,7 @@
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
-            <x-file-upload />
+            <x-invoice.file-upload />
 
 
             @if(!session('pdfData'))
@@ -44,7 +44,7 @@
 
             <!-- this form is for testing purpose -->
             @if(session('pdfData'))
-            <x-form />
+            <x-invoice.form-edit />
             @endif
 
 

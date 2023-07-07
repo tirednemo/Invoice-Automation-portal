@@ -43,7 +43,7 @@ Route::get('/upload', function () {
     return view('uploadInvoice');
 })->middleware(['auth'])->name('uploadInvoice');
 
-Route::get('/view', function () {
+Route::get('/details', function () {
     return view('viewInvoice');
 })->middleware(['auth'])->name('viewInvoice');
 
