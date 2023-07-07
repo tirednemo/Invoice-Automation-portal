@@ -84,24 +84,26 @@ $size = count($pdfData['item_details']);
                     <div class="grid grid-cols-5 gap-3 item-details-row">
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Item Name</label>
-                            <input type="text" name="item_details[{{$index}}][name]" value="{{ $item['name'] }}"
+                            <input required type="text" name="item_details[{{$index}}][name]"
+                                value="{{ $item['name'] }}"
                                 class="mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Unit Price</label>
-                            <input type="number" name="item_details[{{$index}}][unit_price]"
+                            <input required type="number" name="item_details[{{$index}}][unit_price]"
                                 value="{{ $item['unit_price'] }}"
                                 class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Quantity</label>
-                            <input type="number" name="item_details[{{$index}}][quantity]"
+                            <input required type="number" name="item_details[{{$index}}][quantity]"
                                 value="{{ $item['quantity'] }}"
                                 class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Amount</label>
-                            <input type="number" name="item_details[{{$index}}][amount]" value="{{ $item['amount'] }}"
+                            <input required type="number" name="item_details[{{$index}}][amount]"
+                                value="{{ $item['amount'] }}"
                                 class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
@@ -169,6 +171,7 @@ document.addEventListener('DOMContentLoaded', function() {
             label.textContent = fieldNames[i];
 
             const input = document.createElement('input');
+            input.required = true;
             input.type = i === 0 ? 'text' : 'number';
             input.name = `item_details[${index}][${inputFields[i]}]`;
             input.className =
@@ -216,29 +219,42 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function validateForm() {
-    var totalAmount = parseFloat(document.getElementById('total_amount').value);
-    var itemAmounts = document.getElementsByName("item_details[][amount]");
-    var itemTotal = 0;
+    var totalAmountInput = parseFloat(document.getElementById('total_amount').value);
+    // var itemAmounts = document.getElementsByName("item_details[][amount]");
+    // var itemTotal = 0;
 
-    for (let i = 0; i < itemAmounts.length; i++) {
+    // for (let i = 0; i < itemAmounts.length; i++) {
 
-        itemTotal += parseFloat(itemAmounts[i].value);
-    }
-
-    // if (totalAmount !== itemTotal) {
-    //     Toastify({
-    //         text: "Total amount does not match the sum of item amounts.",
-    //         duration: 3000,
-    //         close: true,
-    //         gravity: 'bottom',
-    //         position: 'right',
-    //         style: {
-    //             background: 'red'
-    //         },
-    //         stopOnFocus: true
-    //     }).showToast();
-    //     return false;
+    //     itemTotal += parseFloat(itemAmounts[i].value);
     // }
+
+    var amountInputs = document.querySelectorAll('input[name^="item_details"][name$="[amount]"]');
+    var totalAmount = 0;
+
+    amountInputs.forEach(function(input) {
+        var amount = parseFloat(input.value);
+        if (!isNaN(amount)) {
+            totalAmount += amount;
+        }
+    });
+
+    console.log(totalAmount);
+
+
+    if (totalAmount !== totalAmountInput) {
+        Toastify({
+            text: "Total amount does not match the sum of item amounts.",
+            duration: 3000,
+            close: true,
+            gravity: 'bottom',
+            position: 'right',
+            style: {
+                background: 'red'
+            },
+            stopOnFocus: true
+        }).showToast();
+        return false;
+    }
 
     return true;
 }
