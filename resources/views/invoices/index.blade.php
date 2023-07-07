@@ -3,7 +3,7 @@
 
         <div class="flow-root">
             <x-primary-button class="mt-3 float-right">
-                <a href="{{ route('uploadInvoice') }}">{{ __('Add Invoice') }}</a>
+                <a href="{{ route('invoices.create') }}">{{ __('Add Invoice') }}</a>
             </x-primary-button>
         </div>
 

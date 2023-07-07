@@ -20,7 +20,6 @@
 
     <!-- Toast -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
 </head>
 
 <body class="font-sans antialiased">
