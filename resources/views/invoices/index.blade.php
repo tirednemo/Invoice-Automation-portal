@@ -50,7 +50,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
                             <button class="bg-gray-100 py-2 px-2 rounded focus:outline-none focus:shadow-outline">
-                                <a href="{{ route('viewInvoice') }}"></a>{{ __('Details') }}</a>
+                                <a href="{{ route('viewInvoice') }}">{{ __('Details') }}</a>
                             </button>
                         </td>
                     </tr>
