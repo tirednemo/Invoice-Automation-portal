@@ -19,8 +19,9 @@ class Invoice extends Model
         'email',
         'billing_address',
         'shipping_address',
-        'total', 10, 2,
+        'total',
         'note',
+        'status',
         'payee',
     ];
 

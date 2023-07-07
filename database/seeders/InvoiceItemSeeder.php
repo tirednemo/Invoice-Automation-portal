@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use App\Models\InvoiceItem;
 
@@ -21,6 +20,7 @@ class InvoiceItemSeeder extends Seeder
             'unit_price'=> '10.00',
             'amount' => '10.00',
         ]);
+
         InvoiceItem::create([
             'id' => '2',
             'invoice_id' => '2',
