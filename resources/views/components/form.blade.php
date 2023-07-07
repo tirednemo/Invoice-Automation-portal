@@ -78,42 +78,46 @@ $size = count($pdfData['item_details']);
         <div class="mb-6">
             <div class="mb-8 mt-4">
                 <h2 class="text-lg font-bold mb-2">Item Details</h2>
+
                 <div id="item-details-container">
                     @foreach($pdfData['item_details'] as $index => $item)
-                    <div class="grid grid-cols-4 gap-3 item-details-row">
-                        <div>
+                    <div class="grid grid-cols-5 gap-3 item-details-row">
+                        <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Item Name</label>
-                            <input type="text" name="item_details[{{$index}}][name]" value="{{ $item['name'] }}" class="mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="text" name="item_details[{{$index}}][name]" value="{{ $item['name'] }}"
+                                class="mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
-                        <div>
+                        <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Unit Price</label>
-                            <input type="number" name="item_details[{{$index}}][unit_price]" value="{{ $item['unit_price'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="number" name="item_details[{{$index}}][unit_price]"
+                                value="{{ $item['unit_price'] }}"
+                                class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
-                        <div>
+                        <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Quantity</label>
-                            <input type="number" name="item_details[{{$index}}][quantity]" value="{{ $item['quantity'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="number" name="item_details[{{$index}}][quantity]"
+                                value="{{ $item['quantity'] }}"
+                                class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
-                        <div>
+                        <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Amount</label>
-                            <input type="number" name="item_details[{{$index}}][amount]" value="{{ $item['amount'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                            <input type="number" name="item_details[{{$index}}][amount]" value="{{ $item['amount'] }}"
+                                class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div class="col-span-1">
+                            <x-primary-button style="background-color: red;" type="button" class="mt-6 block w-full text-center text-sm border-gray-300 rounded-md
+               flex items-center justify-center hover:text-white-500 delete-button">
+                                Delete
+                            </x-primary-button>
                         </div>
                     </div>
                     @endforeach
                 </div>
-                <div class="mt-6" id="add-remove-buttons">
-                    <div class="grid grid-cols-2 gap-2">
-                        <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
-               flex items-center justify-center hover:text-blue-500">
-                            Add Another Item
-                        </x-primary-button>
-                        <x-primary-button type="button" id="remove-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
-               flex items-center justify-center hover:text-blue-500">
-                            Remove An Item
-                        </x-primary-button>
-                    </div>
 
-                </div>
-
+                <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
+               flex items-center justify-center hover:text-blue-500">
+                    Add Another Item
+                </x-primary-button>
             </div>
         </div>
 
@@ -143,17 +147,16 @@ $size = count($pdfData['item_details']);
 
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const removeItemDetailsBtn = document.getElementById('remove-item-details-btn');
-        const addItemDetailsBtn = document.getElementById('add-item-details-btn');
-        const itemDetailsContainer = document.getElementById('item-details-container');
-    
-        var index = "<?php echo $size; ?>";
+document.addEventListener('DOMContentLoaded', function() {
+    const addItemDetailsBtn = document.getElementById('add-item-details-btn');
+    const itemDetailsContainer = document.getElementById('item-details-container');
 
-        addItemDetailsBtn.addEventListener('click', function() {
-            index++;
-            const itemDetailsRow = document.createElement('div');
-            itemDetailsRow.className = 'grid grid-cols-4 gap-3 item-details-row';
+    var index = "<?php echo $size; ?>";
+
+    addItemDetailsBtn.addEventListener('click', function() {
+        index++;
+        const itemDetailsRow = document.createElement('div');
+        itemDetailsRow.className = 'grid grid-cols-5 gap-3 item-details-row';
 
         const fieldNames = ['Item Name', 'Unit Price', 'Quantity', 'Amount'];
         const inputFields = ['name', 'unit_price', 'quantity', 'amount'];
@@ -165,27 +168,50 @@ $size = count($pdfData['item_details']);
             label.className = 'block text-gray-700 text-sm font-bold mb-1';
             label.textContent = fieldNames[i];
 
-                const input = document.createElement('input');
-                input.type = i === 0 ? 'text' : 'number';
-                input.name = `item_details[${index}][${inputFields[i]}]`;
-                input.className = 'mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md';
+            const input = document.createElement('input');
+            input.type = i === 0 ? 'text' : 'number';
+            input.name = `item_details[${index}][${inputFields[i]}]`;
+            input.className =
+                'mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md';
 
             inputDiv.appendChild(label);
             inputDiv.appendChild(input);
             itemDetailsRow.appendChild(inputDiv);
         }
 
+
+        const deleteButtonDiv = document.createElement('div');
+        deleteButtonDiv.className = 'col-span-1';
+
+        const deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.className =
+            'mt-6 block w-full text-center py-2 text-sm font-semibold text-xs text-white uppercase tracking-widest border-gray-300 rounded-md flex items-center justify-center hover:text-white-500 delete-button';
+        deleteButton.style.backgroundColor = 'red';
+        deleteButton.style.color = 'white';
+        deleteButton.textContent = 'DELETE';
+
+        deleteButton.addEventListener('click', function() {
+            itemDetailsContainer.removeChild(itemDetailsRow);
+        });
+
+        deleteButtonDiv.appendChild(deleteButton);
+        itemDetailsRow.appendChild(deleteButtonDiv);
         itemDetailsContainer.appendChild(itemDetailsRow);
 
         const rowElements = document.querySelectorAll(".item-details-row");
-        itemDetailsContainer.append(addRemoveButtons);
+        itemDetailsContainer.append(addItemDetailsBtn);
     });
 
-    removeItemDetailsBtn.addEventListener('click', function() {
-        const itemDetailsRows = itemDetailsContainer.getElementsByClassName('item-details-row');
-        if (itemDetailsRows.length > 0) {
-            itemDetailsRows[itemDetailsRows.length - 1].remove();
-        }
+    function handleDeleteButtonClick(event) {
+        var row = event.target.closest('.item-details-row');
+        row.parentNode.removeChild(row);
+    }
+
+    var deleteButtons = document.querySelectorAll('.delete-button');
+
+    deleteButtons.forEach(function(button) {
+        button.addEventListener('click', handleDeleteButtonClick);
     });
 });
 
