@@ -56,7 +56,33 @@
 
 
 
-      
+        <div class="mb-6">
+            <div class="mb-8 mt-4">
+                <h2 class="text-lg font-bold mb-2">Item Details</h2>
+                <div id="item-details-container">
+                    @foreach($invoice->items as $index => $item)
+                    <div class="grid grid-cols-4 gap-3 item-details-row">
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-1">Item Name</label>
+                            <input readonly type="text" name="item_details[{{$index}}][name]" value="{{ $item['item_name'] }}" class="mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-1">Unit Price</label>
+                            <input readonly type="number" name="item_details[{{$index}}][unit_price]" value="{{ $item['unit_price'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-1">Quantity</label>
+                            <input readonly type="number" name="item_details[{{$index}}][quantity]" value="{{ $item['quantity'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 text-sm font-bold mb-1">Amount</label>
+                            <input readonly type="number" name="item_details[{{$index}}][amount]" value="{{ $item['amount'] }}" class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
 
 
 

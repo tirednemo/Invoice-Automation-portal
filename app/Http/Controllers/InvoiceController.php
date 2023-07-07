@@ -75,7 +75,9 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice): View
     {
-        return view('invoices.show', compact('invoice'));
+        return view('invoices.show', compact('invoice'), [
+            'invoices' => Invoice::with('items')->latest()->get(),
+        ]);
     }
 
     /**
