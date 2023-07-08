@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session as FacadesSession;
 use Illuminate\View\View;
 
 class InvoiceController extends Controller
@@ -25,9 +23,10 @@ class InvoiceController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(): View
     {
-        //
+        Session::forget(['pdfFileName', 'pdfData']);
+        return view('invoices.create');
     }
 
     /**
