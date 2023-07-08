@@ -30,7 +30,7 @@
         </div>
 
         <div class="flex items-center mt-4">
-            <x-primary-button class="ml-3">
+            <x-primary-button type="button" class="ml-3">
                 <a href="{{ route('register') }}">
                     {{ __('Register') }}
                 </a>
