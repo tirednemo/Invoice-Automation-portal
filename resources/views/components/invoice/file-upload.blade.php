@@ -43,23 +43,23 @@
 
 
 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-5">
-        <form method="POST" action="{{ route('upload.invoice') }}" enctype="multipart/form-data">
-            @csrf
-            <div class="flex flex-col">
-                <div class="relative">
-                    <label for="file-upload" class="cursor-pointer bg-slate-500 text-white text-sm py-2 px-4 rounded-lg">
-                        Choose a file
-                    </label>
-                    <input id="file-upload" type="file" name="invoice" class="hidden" onchange="displayFilePreview(event)">
-                    <div id="file-preview" class="mt-2"></div>
-                </div>
-                <div class="mt-4 flex justify-end">
-                    <x-primary-button class="py-2 px-4">
-                        Upload
-                    </x-primary-button>
-                </div>
+    <form method="POST" action="{{ route('upload.invoice') }}" enctype="multipart/form-data">
+        @csrf
+        <div class="flex flex-col">
+            <div class="relative">
+                <label for="file-upload" class="cursor-pointer bg-slate-500 text-white text-sm py-2 px-4 rounded-lg">
+                    Choose a file
+                </label>
+                <input id="file-upload" type="file" name="invoice" class="hidden" onchange="displayFilePreview(event)">
+                <div id="file-preview" class="mt-2"></div>
             </div>
-        </form>
+            <div class="mt-4 flex justify-end">
+                <x-primary-button class="py-2 px-4">
+                    Upload
+                </x-primary-button>
+            </div>
+        </div>
+    </form>
 </div>
 
 <script>

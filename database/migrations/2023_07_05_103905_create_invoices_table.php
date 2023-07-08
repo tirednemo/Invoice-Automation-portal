@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('shipping_address');
             $table->decimal('total', 10, 2);
             $table->string('note');
-            $table->string('payee');
+            $table->string('merchant_name');
             $table->string('status');
             $table->string('pdf_name');
             $table->timestamps();

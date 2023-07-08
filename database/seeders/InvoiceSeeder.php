@@ -24,7 +24,7 @@ class InvoiceSeeder extends Seeder
             'shipping_address' => 'Road#5, Saturn',
             'total' => '10.00',
             'note' => 'no discount',
-            'payee' => 'Earth Dept Store',
+            'merchant_name' => 'Earth Dept Store',
             'status' => 'Completed',
             'pdf_name' => 'time_sample_1.pdf',
         ]);
@@ -41,7 +41,7 @@ class InvoiceSeeder extends Seeder
             'shipping_address' => 'Road#7, Jupiter',
             'total' => '540.00',
             'note' => 'no discount',
-            'payee' => '9/11',
+            'merchant_name' => '9/11',
             'status' => 'Pending',
             'pdf_name' => 'time_sample_2.pdf',
         ]);

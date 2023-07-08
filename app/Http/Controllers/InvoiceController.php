@@ -26,7 +26,6 @@ class InvoiceController extends Controller
      */
     public function create(): View
     {
-        Session::forget(['pdfFileName', 'pdfData']);
         return view('invoices.create');
     }
 
@@ -48,8 +47,9 @@ class InvoiceController extends Controller
         $invoice->shipping_address = $request->shipping_address;
         $invoice->total = $request->total_amount;
         $invoice->note = $request->note;
-        $invoice->payee = "Robi";
-        $invoice->status = "Due";
+        $invoice->merchant_name = $request->merchant_name;
+        $invoice->status = $request->has('status') ? 'Completed' : 'Pending';
+        $invoice->pdf_name = session('pdfFileName');
 
         $invoice->save();
 
@@ -76,7 +76,7 @@ class InvoiceController extends Controller
     public function show(Invoice $invoice): View
     {
         return view('invoices.show', compact('invoice'), [
-            'invoices' => Invoice::with('items')->latest()->get(),
+            'invoices' => Invoice::with('items')->get(),
         ]);
     }
 

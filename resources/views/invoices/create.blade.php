@@ -1,4 +1,20 @@
 <x-app-layout>
+    <style>
+        .animate-spin {
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+
 
     <div class="py-12">
         <div class="max-w-4xl mx-auto sm:px-6 lg:px-8">
@@ -41,9 +57,6 @@
             @if(session('pdfData'))
             <x-invoice.form-edit />
             @endif
-
-
-
         </div>
     </div>
 
@@ -178,21 +191,4 @@
         }).showToast();
     </script>
     @endif
-
-    <style>
-        .animate-spin {
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
-
 </x-app-layout>

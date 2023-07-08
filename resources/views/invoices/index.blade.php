@@ -42,7 +42,7 @@
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->user->name }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->payee }}</div>
+                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->merchant_name }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->total }}</div>
@@ -61,7 +61,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
                             <button class="bg-gray-100 py-2 px-2 rounded">
-                                <a href="{{ route('invoices.show', ['invoice' => $invoice->id]) }}">{{ $invoice->id}}</a>
+                                <a href="{{ route('invoices.show', ['invoice' => $invoice->id]) }}">{{ __('Details') }}</a>
                             </button>
                         </td>
                     </tr>

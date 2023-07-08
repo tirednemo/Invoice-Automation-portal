@@ -12,9 +12,13 @@
                 </div>
 
                 <div>
-                    <label for="invoice_number" class="block text-gray-700 text-sm font-bold mb-2">Invoice
-                        Number</label>
+                    <label for="invoice_number" class="block text-gray-700 text-sm font-bold mb-2">Invoice Number</label>
                     <input readonly id="invoice_number" type="text" name="invoice_number" value="{{ $invoice->invoice_no }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                </div>
+
+                <div class="col-span-2">
+                    <label for="merchant_name" class="block text-gray-700 text-sm font-bold mb-2">Merchant Name</label>
+                    <input readonly id="merchant_name" type="text" name="merchant_name" value="{{ $invoice->merchant_name }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
             </div>
         </div>
@@ -40,14 +44,12 @@
                 </div>
 
                 <div>
-                    <label for="billing_address" class="block text-gray-700 text-sm font-bold mb-2">Billing
-                        Address</label>
+                    <label for="billing_address" class="block text-gray-700 text-sm font-bold mb-2">Billing Address</label>
                     <textarea readonly id="billing_address" type="text" name="billing_address" value="{{ $invoice->billing_address }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $invoice->billing_address }}</textarea>
                 </div>
 
                 <div>
-                    <label for="shipping_address" class="block text-gray-700 text-sm font-bold mb-2">Shipping
-                        Address</label>
+                    <label for="shipping_address" class="block text-gray-700 text-sm font-bold mb-2">Shipping Address</label>
                     <textarea readonly id="shipping_address" type="text" name="shipping_address" value="{{ $invoice->shipping_address }}" class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $invoice->shipping_address }}</textarea>
                 </div>
             </div>

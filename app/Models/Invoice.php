@@ -22,7 +22,7 @@ class Invoice extends Model
         'total',
         'note',
         'status',
-        'payee',
+        'merchant_name',
     ];
     
     protected $casts = [
