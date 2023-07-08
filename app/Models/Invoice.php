@@ -24,6 +24,10 @@ class Invoice extends Model
         'status',
         'payee',
     ];
+    
+    protected $casts = [
+        'invoice_date' => 'datetime',
+    ];
 
     public function user(): BelongsTo
     {

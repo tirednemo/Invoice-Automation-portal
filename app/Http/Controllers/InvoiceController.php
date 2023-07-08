@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Invoice;
 use App\Models\InvoiceItem;
+
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -92,7 +93,14 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, Invoice $invoice)
     {
-        //
+        $request->validate([
+            'status' => 'required|in:Completed,Pending',
+        ]);
+    
+        $invoice->status = $request->status;
+        $invoice->save();
+    
+        return redirect()->route('invoices.index')->with('success', 'Status updated successfully.');
     }
 
     /**

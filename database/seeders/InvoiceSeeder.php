@@ -42,7 +42,7 @@ class InvoiceSeeder extends Seeder
             'total' => '540.00',
             'note' => 'no discount',
             'payee' => '9/11',
-            'status' => 'Due',
+            'status' => 'Pending',
             'pdf_name' => 'time_sample_2.pdf',
         ]);
     }

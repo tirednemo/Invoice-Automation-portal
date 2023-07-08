@@ -11,7 +11,8 @@
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
                     <tr>
-                        <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Invoice ID</th>
+                        <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">SL</th>
+                        <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Invoice No</th>
                         <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Uploaded At</th>
                         <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Purchased At</th>
                         <th class="px-6 py-3 bg-gray-100 text-left text-xs leading-4 font-medium text-gray-500 uppercase tracking-wider">Ship To</th>
@@ -29,15 +30,16 @@
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->id }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
+                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->invoice_no }}</div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-no-wrap">
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->created_at->format('j M Y, g:i a') }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->invoice_date}}</div>
+                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->invoice_date->format('j M Y, g:i a')}}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="text-sm leading-5 text-gray-900">
-                                {{ $invoice->user->name }}
-                            </div>
+                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->user->name }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->payee }}</div>
@@ -46,10 +48,19 @@
                             <div class="text-sm leading-5 text-gray-900">{{ $invoice->total }}</div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
-                            <div class="text-sm leading-5 text-gray-900">{{ $invoice->status }}</div>
+                            <div class="text-sm leading-5 text-gray-900">
+                                <form method="POST" action="{{ route('invoices.update', $invoice->id) }}">
+                                    @csrf
+                                    @method('PATCH')
+                                    <select name="status" class="bg-gray-100 py-2 px-2 rounded border-transparent" onchange="this.form.submit()">
+                                        <option value="Completed" {{ $invoice->status === 'Completed' ? 'selected' : '' }}>Completed</option>
+                                        <option value="Pending" {{ $invoice->status === 'Pending' ? 'selected' : '' }}>Pending</option>
+                                    </select>
+                                </form>
+                            </div>
                         </td>
                         <td class="px-6 py-4 whitespace-no-wrap">
-                            <button class="bg-gray-100 py-2 px-2 rounded focus:outline-none focus:shadow-outline">
+                            <button class="bg-gray-100 py-2 px-2 rounded">
                                 <a href="{{ route('invoices.show', ['invoice' => $invoice->id]) }}">{{ $invoice->id}}</a>
                             </button>
                         </td>

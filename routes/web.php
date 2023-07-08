@@ -43,7 +43,7 @@ Route::get('/dashboard', function () {
 
 
 Route::resource('invoices', InvoiceController::class)
-    ->only(['index', 'create', 'store', 'show'])
+    ->only(['index', 'create', 'store', 'show', 'update'])
     ->middleware(['auth', 'verified']);
 //HTTP method   route URL                   route name/key
 // GET          /invoices                   invoices.index
