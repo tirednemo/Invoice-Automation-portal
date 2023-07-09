@@ -19,4 +19,17 @@ class SessionController extends Controller
         Session::forget(['pdfFileName', 'pdfData']);
         return response()->json(['message' => 'Data removed from session successfully']);
     }
+
+    public function getRegexApiUrl(){
+        $api = env('REGEX_API');
+        return response()->json(['api' => $api]);
+    }
+    public function getOCRApiUrl(){
+        $api = env('OCR_API');
+        return response()->json(['api' => $api]);
+    }
+    public function getDLApiUrl(){
+        $api = env('DL_API');
+        return response()->json(['api' => $api]);
+    }
 }

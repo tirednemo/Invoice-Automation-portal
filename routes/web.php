@@ -61,5 +61,8 @@ Route::post('/upload-pdf', [UploadFileController::class, 'uploadPDF'])
 
 Route::post('/store-data-in-session', [SessionController::class, 'storeDataInSession']);
 Route::delete('/delete-data-from-session', [SessionController::class, 'deleteSessionData']);
+Route::get('/get-regex-api-url', [SessionController::class, 'getRegexApiUrl']);
+Route::get('/get-ocr-api-url', [SessionController::class, 'getOCRApiUrl']);
+Route::get('/get-dl-api-url', [SessionController::class, 'getDLApiUrl']);
 
 require __DIR__ . '/auth.php';

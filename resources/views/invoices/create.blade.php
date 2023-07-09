@@ -74,21 +74,30 @@
 
         loadingElement.classList.remove('hidden');
         buttonDiv.style.display = 'none';
+        let api = ''
 
-        axios.get(`http://localhost:3000/api/regex?`, {
-                params: {
-                    pdfFileName: pdfFileName
-                }
-            })
+        axios.get(`/get-regex-api-url`)
             .then(function(response) {
-                console.log(response.data);
-
-                axios.post('/store-data-in-session', {
-                        data: response.data
+                console.log(response.data.api);
+                api = response.data.api
+                axios.get(api, {
+                        params: {
+                            pdfFileName: pdfFileName
+                        }
                     })
                     .then(function(response) {
-                        console.log(response);
-                        location.reload();
+                        console.log(response.data);
+
+                        axios.post('/store-data-in-session', {
+                                data: response.data
+                            })
+                            .then(function(response) {
+                                console.log(response);
+                                location.reload();
+                            })
+                            .catch(function(error) {
+                                console.log(error);
+                            });
                     })
                     .catch(function(error) {
                         console.log(error);
@@ -97,6 +106,8 @@
             .catch(function(error) {
                 console.log(error);
             });
+
+
     }
 
     function getDataByOCR() {
@@ -106,21 +117,30 @@
 
         loadingElement.classList.remove('hidden');
         buttonDiv.style.display = 'none';
+        let api = ''
 
-        axios.get(`http://localhost:3000/api/regex?`, {
-                params: {
-                    pdfFileName: pdfFileName
-                }
-            })
+        axios.get(`/get-ocr-api-url`)
             .then(function(response) {
-                console.log(response.data);
-
-                axios.post('/store-data-in-session', {
-                        data: response.data
+                console.log(response.data.api);
+                api = response.data.api
+                axios.get(api, {
+                        params: {
+                            pdfFileName: pdfFileName
+                        }
                     })
                     .then(function(response) {
-                        console.log(response);
-                        location.reload();
+                        console.log(response.data);
+
+                        axios.post('/store-data-in-session', {
+                                data: response.data
+                            })
+                            .then(function(response) {
+                                console.log(response);
+                                location.reload();
+                            })
+                            .catch(function(error) {
+                                console.log(error);
+                            });
                     })
                     .catch(function(error) {
                         console.log(error);
@@ -129,6 +149,8 @@
             .catch(function(error) {
                 console.log(error);
             });
+
+
     }
 
     function getDataByDL() {
@@ -138,21 +160,30 @@
 
         loadingElement.classList.remove('hidden');
         buttonDiv.style.display = 'none';
+        let api = ''
 
-        axios.get(`http://localhost:3000/api/regex?`, {
-                params: {
-                    pdfFileName: pdfFileName
-                }
-            })
+        axios.get(`/get-dl-api-url`)
             .then(function(response) {
-                console.log(response.data);
-
-                axios.post('/store-data-in-session', {
-                        data: response.data
+                console.log(response.data.api);
+                api = response.data.api
+                axios.get(api, {
+                        params: {
+                            pdfFileName: pdfFileName
+                        }
                     })
                     .then(function(response) {
-                        console.log(response);
-                        location.reload();
+                        console.log(response.data);
+
+                        axios.post('/store-data-in-session', {
+                                data: response.data
+                            })
+                            .then(function(response) {
+                                console.log(response);
+                                location.reload();
+                            })
+                            .catch(function(error) {
+                                console.log(error);
+                            });
                     })
                     .catch(function(error) {
                         console.log(error);
@@ -161,6 +192,8 @@
             .catch(function(error) {
                 console.log(error);
             });
+
+
     }
     </script>
 

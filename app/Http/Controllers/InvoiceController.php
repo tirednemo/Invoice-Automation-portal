@@ -48,7 +48,7 @@ class InvoiceController extends Controller
         $invoice->total = $request->total_amount;
         $invoice->note = $request->note;
         $invoice->merchant_name = $request->merchant_name;
-        $invoice->status = $request->has('status') ? 'Completed' : 'Pending';
+        $invoice->status = 'Pending';
         $invoice->pdf_name = session('pdfFileName');
 
         $invoice->save();

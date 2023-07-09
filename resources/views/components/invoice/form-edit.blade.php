@@ -145,13 +145,13 @@ $size = count($pdfData['item_details']);
                 class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['note'] }}</textarea>
         </div>
 
-        <div class="mb-4">
+        <!-- <div class="mb-4">
             <label for="status" class="inline-flex items-center">
                 <input type="checkbox" id="status" name="status"
                     class="form-checkbox h-4 w-4 text-blue-500 focus:ring-blue-500 focus:border-blue-500 border-gray-300 rounded">
                 <span class="ml-2 text-gray-700">Mark as completed</span>
             </label>
-        </div>
+        </div> -->
 
         <div class="flex items-center mt-4">
             <div class="flex-grow"></div>

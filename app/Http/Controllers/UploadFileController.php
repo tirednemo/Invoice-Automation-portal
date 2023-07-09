@@ -22,7 +22,7 @@ class UploadFileController extends Controller
             //$pdfFileName = $pdfFile->getClientOriginalName();
             $pdfFileName = time() . '_' . $pdfFile->getClientOriginalName();
 
-            $storagePath = 'pdfs/';
+            $storagePath = 'invoices/';
             //$pdfFile->move($storagePath, $pdfFileName, );
             $pdfFile->storeAs($storagePath, $pdfFileName, 'external');
 
