@@ -1,8 +1,3 @@
-@php
-$pdfData = session('pdfData');
-$size = count($pdfData['item_details']);
-@endphp
-
 <div class="bg-white shadow-md rounded-lg p-6" style="margin-top: 15px;" id="pdfDataForm">
     <h1 class="text-2xl text-center font-bold mb-3">Invoice Details</h1>
     <form method="POST" action="{{ route('invoices.store') }}" onsubmit="return validateForm()">
@@ -13,23 +8,20 @@ $size = count($pdfData['item_details']);
             <div class="grid grid-cols-2 gap-4">
                 <div>
                     <label for="invoice_date" class="block text-gray-700 text-sm font-bold mb-2">Invoice Date</label>
-                    <input id="invoice_date" type="date" name="invoice_date"
-                        value="{{ date('Y-m-d', strtotime($pdfData['invoice_info']['date'])) }}"
+                    <input id="invoice_date" type="text" name="invoice_date" value=""
                         class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="invoice_number" class="block text-gray-700 text-sm font-bold mb-2">Invoice
                         Number</label>
-                    <input id="invoice_number" type="text" name="invoice_number"
-                        value="{{ $pdfData['invoice_info']['number'] }}"
+                    <input id="invoice_number" type="text" name="invoice_number" value=""
                         class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div class="col-span-2">
                     <label for="merchant_name" class="block text-gray-700 text-sm font-bold mb-2">Merchant Name</label>
-                    <input id="merchant_name" type="text" name="merchant_name"
-                        value="{{ $pdfData['customer_info']['name'] }}"
+                    <input id="merchant_name" type="text" name="merchant_name" value=""
                         class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
             </div>
@@ -42,38 +34,34 @@ $size = count($pdfData['item_details']);
             <div class="grid grid-cols-2 gap-4">
                 <div class="col-span-2">
                     <label for="customer_name" class="block text-gray-700 text-sm font-bold mb-2">Customer Name</label>
-                    <input id="customer_name" type="text" name="customer_name"
-                        value="{{ $pdfData['customer_info']['name'] }}"
+                    <input id="customer_name" type="text" name="customer_name" value=""
                         class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone</label>
-                    <input id="phone" type="text" maxlength="11" name="phone"
-                        value="{{ $pdfData['customer_info']['phone'] }}"
+                    <input id="phone" type="text" maxlength="11" name="phone" value=""
                         class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="email" class="block text-gray-700 text-sm font-bold mb-2">Email</label>
-                    <input id="email" type="email" name="email" value="{{ $pdfData['customer_info']['email'] }}"
+                    <input id="email" type="email" name="email" value=""
                         class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 </div>
 
                 <div>
                     <label for="billing_address" class="block text-gray-700 text-sm font-bold mb-2">Billing
                         Address</label>
-                    <textarea id="billing_address" type="text" name="billing_address"
-                        value="{{ $pdfData['customer_info']['billing_address'] }}"
-                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['customer_info']['billing_address'] }}</textarea>
+                    <textarea id="billing_address" type="text" name="billing_address" value=""
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
                 </div>
 
                 <div>
                     <label for="shipping_address" class="block text-gray-700 text-sm font-bold mb-2">Shipping
                         Address</label>
-                    <textarea id="shipping_address" type="text" name="shipping_address"
-                        value="{{ $pdfData['customer_info']['shipping_address'] }}"
-                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['customer_info']['shipping_address'] }}</textarea>
+                    <textarea id="shipping_address" type="text" name="shipping_address" value=""
+                        class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
                 </div>
             </div>
 
@@ -86,30 +74,26 @@ $size = count($pdfData['item_details']);
                 <h2 class="text-lg font-bold mb-2">Item Details</h2>
 
                 <div id="item-details-container">
-                    @foreach($pdfData['item_details'] as $index => $item)
-                    <div class="grid grid-cols-5 gap-3 item-details-row">
+
+                    <!-- <div class="grid grid-cols-5 gap-3 item-details-row">
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Item Name</label>
-                            <input required type="text" name="item_details[{{$index}}][name]"
-                                value="{{ $item['name'] }}"
+                            <input required type="text" name="" value=""
                                 class="mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Unit Price</label>
-                            <input required type="number" name="item_details[{{$index}}][unit_price]"
-                                value="{{ $item['unit_price'] }}"
+                            <input required type="number" name="" value=""
                                 class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Quantity</label>
-                            <input required type="number" name="item_details[{{$index}}][quantity]"
-                                value="{{ $item['quantity'] }}"
+                            <input required type="number" name="" value=""
                                 class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
                             <label class="block text-gray-700 text-sm font-bold mb-1">Amount</label>
-                            <input required type="number" name="item_details[{{$index}}][amount]"
-                                value="{{ $item['amount'] }}"
+                            <input required type="number" name="" value=""
                                 class=" mb-2 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                         </div>
                         <div class="col-span-1">
@@ -118,8 +102,8 @@ $size = count($pdfData['item_details']);
                                 Delete
                             </x-primary-button>
                         </div>
-                    </div>
-                    @endforeach
+                    </div> -->
+
                 </div>
 
                 <x-primary-button type="button" id="add-item-details-btn" class="mt-1 block w-full text-center text-sm border-gray-300 rounded-md
@@ -135,14 +119,14 @@ $size = count($pdfData['item_details']);
 
         <div class="mb-4">
             <label for="total_amount" class="block text-gray-700 text-sm font-bold mb-2">Total Amount</label>
-            <input id="total_amount" type="number" name="total_amount" value="{{ $pdfData['total_amount'] }}"
+            <input id="total_amount" type="number" name="total_amount" value=""
                 class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
         </div>
 
         <div class="mb-4">
             <label for="note" class="block text-gray-700 text-sm font-bold mb-2">Note</label>
             <textarea id="note" name="note"
-                class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md">{{ $pdfData['note'] }}</textarea>
+                class="mt-1 focus:ring-blue-500 focus:border-blue-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"></textarea>
         </div>
 
         <!-- <div class="mb-4">
@@ -178,7 +162,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const itemDetailsContainer = document.getElementById('item-details-container');
     const cancelBtn = document.getElementById('cancel-invoice-btn')
 
-    var index = "<?php echo $size; ?>";
+    var index = 1;
 
     addItemDetailsBtn.addEventListener('click', function() {
         index++;
