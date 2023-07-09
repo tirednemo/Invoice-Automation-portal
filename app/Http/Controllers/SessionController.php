@@ -14,4 +14,9 @@ class SessionController extends Controller
 
         return response()->json(['message' => 'Data stored in session successfully']);
     }
+
+    public function deleteSessionData() {
+        Session::forget(['pdfFileName', 'pdfData']);
+        return response()->json(['message' => 'Data removed from session successfully']);
+    }
 }

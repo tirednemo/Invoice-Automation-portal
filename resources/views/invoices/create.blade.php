@@ -1,18 +1,18 @@
 <x-app-layout>
     <style>
-        .animate-spin {
-            animation: spin 1s linear infinite;
+    .animate-spin {
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
         }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
+        100% {
+            transform: rotate(360deg);
         }
+    }
     </style>
 
 
@@ -23,9 +23,11 @@
 
             @if(!session('pdfData'))
             <div id="loading" class="hidden flex items-center justify-center" style="margin-top: 100px;">
-                <svg class="animate-spin h-6 w-6 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg class="animate-spin h-6 w-6 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8z">
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8z">
                     </path>
                 </svg>
                 <span>Loading...</span>
@@ -37,13 +39,16 @@
                 <input type="text" id="pdfFileName" hidden value="{{ session('pdfFileName') }}">
                 <h1 class="text-2xl text-center font-bold mb-3">Choose Parsing Algorithm</h1>
                 <div class="flex">
-                    <x-primary-button id="getInvoiceBtn" class="flex-grow mx-2 flex justify-center" onclick="getDataByRegex()">
+                    <x-primary-button id="getInvoiceBtn" class="flex-grow mx-2 flex justify-center"
+                        onclick="getDataByRegex()">
                         REGEX
                     </x-primary-button>
-                    <x-primary-button id="getInvoiceBtn1" class="flex-grow mx-2 flex justify-center" onclick="getDataByOCR()">
+                    <x-primary-button id="getInvoiceBtn1" class="flex-grow mx-2 flex justify-center"
+                        onclick="getDataByOCR()">
                         OCR
                     </x-primary-button>
-                    <x-primary-button id="getInvoiceBtn2" class="flex-grow mx-2 flex justify-center" onclick="getDataByDL()">
+                    <x-primary-button id="getInvoiceBtn2" class="flex-grow mx-2 flex justify-center"
+                        onclick="getDataByDL()">
                         DL
                     </x-primary-button>
                 </div>
@@ -62,133 +67,135 @@
 
 
     <script>
-        function getDataByRegex() {
-            var loadingElement = document.getElementById('loading');
-            var buttonDiv = document.getElementById('buttonDiv')
-            let pdfFileName = document.getElementById('pdfFileName').value
+    function getDataByRegex() {
+        var loadingElement = document.getElementById('loading');
+        var buttonDiv = document.getElementById('buttonDiv')
+        let pdfFileName = document.getElementById('pdfFileName').value
 
-            loadingElement.classList.remove('hidden');
-            buttonDiv.style.display = 'none';
+        loadingElement.classList.remove('hidden');
+        buttonDiv.style.display = 'none';
 
-            axios.get(`http://localhost:3000/api/regex?`, {
-                    params: {
-                        pdfFileName: pdfFileName
-                    }
-                })
-                .then(function(response) {
-                    console.log(response.data);
+        axios.get(`http://localhost:3000/api/regex?`, {
+                params: {
+                    pdfFileName: pdfFileName
+                }
+            })
+            .then(function(response) {
+                console.log(response.data);
 
-                    axios.post('/store-data-in-session', {
-                            data: response.data
-                        })
-                        .then(function(response) {
-                            console.log(response);
-                            location.reload();
-                        })
-                        .catch(function(error) {
-                            console.log(error);
-                        });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }
+                axios.post('/store-data-in-session', {
+                        data: response.data
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
 
-        function getDataByOCR() {
-            var loadingElement = document.getElementById('loading');
-            var buttonDiv = document.getElementById('buttonDiv')
-            let pdfFileName = document.getElementById('pdfFileName').value
+    function getDataByOCR() {
+        var loadingElement = document.getElementById('loading');
+        var buttonDiv = document.getElementById('buttonDiv')
+        let pdfFileName = document.getElementById('pdfFileName').value
 
-            loadingElement.classList.remove('hidden');
-            buttonDiv.style.display = 'none';
+        loadingElement.classList.remove('hidden');
+        buttonDiv.style.display = 'none';
 
-            axios.get(`http://localhost:3000/api/regex?`, {
-                    params: {
-                        pdfFileName: pdfFileName
-                    }
-                })
-                .then(function(response) {
-                    console.log(response.data);
+        axios.get(`http://localhost:3000/api/regex?`, {
+                params: {
+                    pdfFileName: pdfFileName
+                }
+            })
+            .then(function(response) {
+                console.log(response.data);
 
-                    axios.post('/store-data-in-session', {
-                            data: response.data
-                        })
-                        .then(function(response) {
-                            console.log(response);
-                            location.reload();
-                        })
-                        .catch(function(error) {
-                            console.log(error);
-                        });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }
+                axios.post('/store-data-in-session', {
+                        data: response.data
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
 
-        function getDataByDL() {
-            var loadingElement = document.getElementById('loading');
-            var buttonDiv = document.getElementById('buttonDiv')
-            let pdfFileName = document.getElementById('pdfFileName').value
+    function getDataByDL() {
+        var loadingElement = document.getElementById('loading');
+        var buttonDiv = document.getElementById('buttonDiv')
+        let pdfFileName = document.getElementById('pdfFileName').value
 
-            loadingElement.classList.remove('hidden');
-            buttonDiv.style.display = 'none';
+        loadingElement.classList.remove('hidden');
+        buttonDiv.style.display = 'none';
 
-            axios.get(`http://localhost:3000/api/regex?`, {
-                    params: {
-                        pdfFileName: pdfFileName
-                    }
-                })
-                .then(function(response) {
-                    console.log(response.data);
+        axios.get(`http://localhost:3000/api/regex?`, {
+                params: {
+                    pdfFileName: pdfFileName
+                }
+            })
+            .then(function(response) {
+                console.log(response.data);
 
-                    axios.post('/store-data-in-session', {
-                            data: response.data
-                        })
-                        .then(function(response) {
-                            console.log(response);
-                            location.reload();
-                        })
-                        .catch(function(error) {
-                            console.log(error);
-                        });
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }
+                axios.post('/store-data-in-session', {
+                        data: response.data
+                    })
+                    .then(function(response) {
+                        console.log(response);
+                        location.reload();
+                    })
+                    .catch(function(error) {
+                        console.log(error);
+                    });
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
     </script>
 
 
     @if(session('success'))
     <script>
-        Toastify({
-            text: "{{ session('success') }}",
-            duration: 3000,
-            close: true,
-            gravity: 'top',
-            position: 'right',
-            style: {
-                background: 'black'
-            },
-            stopOnFocus: true
-        }).showToast();
+    Toastify({
+        text: "{{ session('success') }}",
+        duration: 3000,
+        close: true,
+        gravity: 'top',
+        position: 'right',
+        style: {
+            background: 'black',
+            borderRadius: '10px'
+        },
+        stopOnFocus: true
+    }).showToast();
     </script>
     @endif
 
     @if(session('errors'))
     <script>
-        Toastify({
-            text: "{{ session('errors')->first('invoice') }}",
-            duration: 3000,
-            close: true,
-            gravity: 'top',
-            position: 'right',
-            style: {
-                background: 'red'
-            },
-            stopOnFocus: true
-        }).showToast();
+    Toastify({
+        text: "{{ session('errors')->first('invoice') }}",
+        duration: 3000,
+        close: true,
+        gravity: 'top',
+        position: 'right',
+        style: {
+            background: 'red',
+            borderRadius: '10px'
+        },
+        stopOnFocus: true
+    }).showToast();
     </script>
     @endif
 </x-app-layout>

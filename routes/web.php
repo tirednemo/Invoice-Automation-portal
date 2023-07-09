@@ -60,5 +60,6 @@ Route::post('/upload-pdf', [UploadFileController::class, 'uploadPDF'])
     ->name('upload.invoice');
 
 Route::post('/store-data-in-session', [SessionController::class, 'storeDataInSession']);
+Route::delete('/delete-data-from-session', [SessionController::class, 'deleteSessionData']);
 
 require __DIR__ . '/auth.php';
