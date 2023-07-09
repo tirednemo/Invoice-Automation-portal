@@ -21,20 +21,7 @@
             <x-invoice.file-upload />
 
 
-            @if(!session('pdfData'))
-            <div id="loading" class="hidden flex items-center justify-center" style="margin-top: 100px;">
-                <svg class="animate-spin h-6 w-6 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
-                    viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8z">
-                    </path>
-                </svg>
-                <span>Loading...</span>
-            </div>
-
-
-            @if(session('success'))
+            @if(session('pdfFileName'))
             <div id="buttonDiv" class="bg-white shadow-md rounded-lg p-6" style="margin-top: 15px;">
                 <input type="text" id="pdfFileName" hidden value="{{ session('pdfFileName') }}">
                 <h1 class="text-2xl text-center font-bold mb-3">Choose Parsing Algorithm</h1>
@@ -55,25 +42,39 @@
             </div>
             @endif
 
-            @endif
-
-
-            <!-- this form is for testing purpose -->
-            @if(session('pdfData'))
-            <x-invoice.form-edit />
-            @endif
+            <!-- @if(!session('pdfData')) -->
+            <!-- <div id="loading" class="flex items-center justify-center" style="margin-top: 100px; display:none">
+                <svg class="animate-spin h-6 w-6 mr-3 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0012 20c4.411 0 8-3.589 8-8h-2c0 3.309-2.691 6-6 6-3.309 0-6-2.691-6-6H6c0 4.411 3.589 8 8 8z">
+                    </path>
+                </svg>
+                <span>Loading...</span> -->
         </div>
+        <!-- @endif -->
+
+
+        <!-- this form is for testing purpose -->
+        @if(session('pdfData'))
+        <x-invoice.form-edit />
+        @endif
+    </div>
     </div>
 
 
     <script>
+    //var loadingElement = document.getElementById('loading');
+
     function getDataByRegex() {
-        var loadingElement = document.getElementById('loading');
         var buttonDiv = document.getElementById('buttonDiv')
         let pdfFileName = document.getElementById('pdfFileName').value
 
-        loadingElement.classList.remove('hidden');
-        buttonDiv.style.display = 'none';
+
+        //loadingElement.style.display = 'flex';
+        //loadingElement.classList.remove('hidden');
+        //buttonDiv.style.display = 'none';
         let api = ''
 
         axios.get(`/get-regex-api-url`)
@@ -87,6 +88,7 @@
                     })
                     .then(function(response) {
                         console.log(response.data);
+                        //loadingElement.style.display = 'none';
 
                         axios.post('/store-data-in-session', {
                                 data: response.data
@@ -111,12 +113,13 @@
     }
 
     function getDataByOCR() {
-        var loadingElement = document.getElementById('loading');
         var buttonDiv = document.getElementById('buttonDiv')
         let pdfFileName = document.getElementById('pdfFileName').value
 
-        loadingElement.classList.remove('hidden');
-        buttonDiv.style.display = 'none';
+
+        //loadingElement.style.display = 'flex';
+        //loadingElement.classList.remove('hidden');
+        //buttonDiv.style.display = 'none';
         let api = ''
 
         axios.get(`/get-ocr-api-url`)
@@ -130,6 +133,7 @@
                     })
                     .then(function(response) {
                         console.log(response.data);
+                        //loadingElement.style.display = 'none';
 
                         axios.post('/store-data-in-session', {
                                 data: response.data
@@ -154,12 +158,13 @@
     }
 
     function getDataByDL() {
-        var loadingElement = document.getElementById('loading');
         var buttonDiv = document.getElementById('buttonDiv')
         let pdfFileName = document.getElementById('pdfFileName').value
 
-        loadingElement.classList.remove('hidden');
-        buttonDiv.style.display = 'none';
+
+        //loadingElement.style.display = 'flex';
+        //loadingElement.classList.remove('hidden');
+        //buttonDiv.style.display = 'none';
         let api = ''
 
         axios.get(`/get-dl-api-url`)
@@ -173,6 +178,7 @@
                     })
                     .then(function(response) {
                         console.log(response.data);
+                        //loadingElement.style.display = 'none';
 
                         axios.post('/store-data-in-session', {
                                 data: response.data
