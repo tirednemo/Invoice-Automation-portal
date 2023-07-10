@@ -1,6 +1,6 @@
-# Invoice-Automation-portal
+# Invoice-Automation-portal-10.0
 
-This guide is a walk-through of the steps required to run this Laravel application locally. The project uses Laravel Breeze for authentication and Blade templates for the views.
+This guide is a walk-through of the steps required to run this Laravel application locally. The project uses Laravel Breeze for authentication, Blade templates with Tailwind CSS for the views and Vite to bundle assets.
 
 ## Prerequisites
 - PHP (8.1 or higher)
